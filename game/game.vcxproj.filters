@@ -18,12 +18,24 @@
     <ClCompile Include="game\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\science\element.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\persistence\persistence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\persistence\binary_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\science\element_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\science\element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
