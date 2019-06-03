@@ -1,14 +1,22 @@
 #include<iostream>
 
-#include"../engine/science/element.h"
+#include"../engine/console/console_beautifier.h"
+#include"../engine/color.h"
 
 int main() {
 
-	createElements();
+	ConsoleBeautifier cb;
 
-	for (int i = 0; i < NUMBER_OF_ELEMENTS; i++) {
-		std::cout << master_element_table[i] << std::endl;
-	}
+	cb.setConsoleColor(CONSOLE_COLOR::RED, CONSOLE_COLOR::DARK_RED);
 
+	std::cout << "Red text with red background" << std::endl;
+
+	cb.setConsoleColor(CONSOLE_COLOR::CYAN, CONSOLE_COLOR::WHITE);
+
+	std::cout << "Stylish white with cyan text" << std::endl;
+
+	centerstring("Middle of the screen!");
+
+	system("pause>null");
 	return 0;
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -122,6 +122,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="engine\color.h" />
+    <ClInclude Include="engine\console\console_beautifier.h" />
     <ClInclude Include="engine\constants.h" />
     <ClInclude Include="engine\persistence\persistence.h" />
     <ClInclude Include="engine\persistence\binary_stream.h" />
@@ -129,6 +131,8 @@
     <ClInclude Include="engine\science\element_factory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="engine\console\console_beautifier.cpp" />
+    <ClCompile Include="engine\persistence\persistence.cpp" />
     <ClCompile Include="engine\science\element.cpp" />
     <ClCompile Include="game\main.cpp" />
   </ItemGroup>
