@@ -27,6 +27,9 @@
     <ClCompile Include="engine\console\console_beautifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\console_part.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\persistence\persistence.h">
@@ -48,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game_part.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\console_part.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

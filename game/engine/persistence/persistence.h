@@ -4,6 +4,6 @@
 
 struct PersistenceStruct {
 	
-	static std::vector<std::string> getCharacterFileNames();
+	std::vector<std::string> getPilotFileNames();
 
 };

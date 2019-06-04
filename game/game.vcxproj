@@ -129,11 +129,14 @@
     <ClInclude Include="engine\persistence\binary_stream.h" />
     <ClInclude Include="engine\science\element.h" />
     <ClInclude Include="engine\science\element_factory.h" />
+    <ClInclude Include="game\console_part.h" />
+    <ClInclude Include="game\game_part.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\console\console_beautifier.cpp" />
     <ClCompile Include="engine\persistence\persistence.cpp" />
     <ClCompile Include="engine\science\element.cpp" />
+    <ClCompile Include="game\console_part.cpp" />
     <ClCompile Include="game\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
