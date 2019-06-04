@@ -26,8 +26,11 @@ typedef enum CONSOLE_COLOR {
 	RED = 12,
 	PINK = 13,
 	YELLOW = 14,
-	WHITE = 15
+	WHITE = 15,
 };
+
+#define CONSOLE_COLOR_START 0
+#define CONSOLE_COLOR_END 15
 
 #elif defined(__APPLE__)
 

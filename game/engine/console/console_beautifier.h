@@ -17,7 +17,8 @@ struct ConsoleBeautifier {
 	/*
 	
 	*/
-
+	void setRandomForegroundColor();
+	void setRandomBackgroundColor();
 
 	int currentForeground, currentBakcground;
 #if defined(_WIN32)
