@@ -1,3 +1,3 @@
 #pragma once
 
-#define PERSISTENT_PATH "persistent/"
+#define PERSISTENT_PATH "persistent//"

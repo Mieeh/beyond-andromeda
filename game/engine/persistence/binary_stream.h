@@ -1,4 +1,7 @@
 #pragma once
 
-#include<fstream>
+#include"../pilot.h"
 
+struct BinaryStream {
+	void serializePilot(const int id, const Pilot& pilot);
+};

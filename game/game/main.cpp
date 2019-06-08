@@ -8,6 +8,7 @@
 #include"console_part.h"
 
 #include<random>
+#include<stdio.h>
 
 int main() {
 
@@ -15,6 +16,5 @@ int main() {
 	consolePart.enter();
 	consolePart.nextPart = &consolePart;
 
-	system("pause>null");
 	return 0;
 }

@@ -1,6 +1,7 @@
 #include "console_beautifier.h"
 
 #include"../color.h"
+#include"../current.h"
 
 #include<string>
 #include<chrono> // Crossplatform, we use for delayed print functionality
@@ -40,6 +41,12 @@ void ConsoleBeautifier::setConsoleColor(int foreground, int background)
 #endif
 }
 
+void ConsoleBeautifier::resetColors()
+{
+	// Black with white foreground
+	setConsoleColor(CONSOLE_COLOR::WHITE, CONSOLE_COLOR::BLACK);
+}
+
 void ConsoleBeautifier::setRandomForegroundColor()
 {
 #if defined(_WIN32)
@@ -62,15 +69,77 @@ void ConsoleBeautifier::setRandomBackgroundColor()
 #endif
 }
 
-void ConsoleBeautifier::printWithDelay(const std::string & string, int time) 
+void ConsoleBeautifier::printWithDelay(const std::string & string, int time, PrintBehaviours behaviours)
 {
 	int delay = time / string.length();
 	for (auto& c : string) {
+
+		if (behaviours == PrintBehaviours::RANDOM_CHAR_COLOR) {
+			setRandomForegroundColor();
+		}
+
 		std::cout << c;
-		// Wait
-		std::this_thread::sleep_for(std::chrono::milliseconds(delay));
-		std::this_thread::sleep_until(std::chrono::system_clock::now() + std::chrono::milliseconds(delay));
+		pause(delay);
 	}
+
+	if (behaviours == PrintBehaviours::RANDOM_CHAR_COLOR) {
+		resetColors();
+	}
+}
+
+void ConsoleBeautifier::centerText(const std::string & string)
+{
+#if defined(_WIN32)
+	HANDLE                     hStdOut;
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	DWORD                      count;
+	DWORD                      cellCount;
+	COORD                      homeCoords = { 0, 0 };
+
+	hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (hStdOut == INVALID_HANDLE_VALUE) return;
+
+	/* Get the number of cells in the current buffer */
+	if (!GetConsoleScreenBufferInfo(hStdOut, &csbi)) return;
+	int spaces = (csbi.dwSize.X/2) - (string.length()/2) - 1; // How many spaces to get to the center
+	for (int i = 0; i < spaces; i++) {
+		std::cout << " ";
+	}
+	std::cout << string << std::endl;
+
+#endif
+}
+
+void ConsoleBeautifier::farRightText(const std::string & string, std::string* appends, size_t appends_size)
+{
+	HANDLE                     hStdOut;
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	DWORD                      count;
+	DWORD                      cellCount;
+	COORD                      homeCoords = { 0, 0 };
+
+	hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (hStdOut == INVALID_HANDLE_VALUE) return;
+
+	/* Get the number of cells in the current buffer */
+	if (!GetConsoleScreenBufferInfo(hStdOut, &csbi)) return;
+	// How many spaces do we go
+	int spaces = csbi.dwSize.X - string.length()*1.5;
+
+	// The line
+	for (int i = 0; i < spaces; i++) {
+		std::cout << " ";
+	}
+	std::cout << string << std::endl;
+
+	// Appends
+	for (int j = 0; j < appends_size; j++) {
+		for (int i = 0; i < spaces; i++) {
+			std::cout << " ";
+		}
+		std::cout << appends[j] << std::endl;
+	}
+
 }
 
 void ConsoleBeautifier::clearConsole()
@@ -119,4 +188,17 @@ void ConsoleBeautifier::clearConsole()
 
 	putp(tigetstr("clear"));
 #endif
+
+	// Output the permanents after clearing
+	centerText("BEYOND ANDROMEDA");
+	
+	std::string appends[] = { "Ship: ", "More: " };
+	farRightText("Pilot: " + Current::Get()->pilot.name, appends, 2);
+}
+
+void ConsoleBeautifier::pause(int ms)
+{
+	// Wait
+	std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+	std::this_thread::sleep_until(std::chrono::system_clock::now() + std::chrono::milliseconds(ms));
 }

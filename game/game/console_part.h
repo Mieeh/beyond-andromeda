@@ -4,6 +4,7 @@
 
 #include"../engine/console/console_beautifier.h"
 #include"../engine/persistence/persistence.h"
+#include"../engine/current.h"
 
 struct ConsolePart : GamePart {
 
@@ -11,6 +12,21 @@ struct ConsolePart : GamePart {
 	Methods
 	*/
 	void enter() override;
+
+	/*
+	Base menu for console part
+	*/
+	void menu();
+
+	/*
+	Used for exiting console part
+	*/
+	void exitMessageCall();
+
+	/*
+	Pilot related functions
+	*/
+	void createPilot();
 
 	/*
 	Juicy
@@ -22,4 +38,5 @@ struct ConsolePart : GamePart {
 	*/
 	ConsoleBeautifier cb;
 	PersistenceStruct persistent;
+	BinaryStream binary_stream;
 };
