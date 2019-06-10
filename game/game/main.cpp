@@ -15,6 +15,6 @@ int main() {
 	ConsolePart consolePart;
 	consolePart.enter();
 	consolePart.nextPart = &consolePart;
-
+	
 	return 0;
 }
