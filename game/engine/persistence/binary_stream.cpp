@@ -12,3 +12,10 @@ void BinaryStream::serializePilot(const int id, const Pilot & pilot)
 	// Write pilot things to the pilot file
 	ostream.write((char*)&pilot.name, sizeof(pilot.name));
 }
+
+Pilot BinaryStream::deserializePilot(std::string file_name)
+{
+	Pilot pilot;
+
+
+}

@@ -16,7 +16,6 @@ void ConsolePart::enter(){
 	// Welcome message
 	cb.printWithDelay("Welcome to Beyond Andromeda Incorporated, your gateway to the stars through cutting edge tech\nPress any button to continue...", 1750);
 	_getch();
-	//std::cin.get();
 	cb.clearConsole();
 
 	// GOTO MENU
@@ -31,10 +30,13 @@ void ConsolePart::menu()
 
 	while (running) {
 
+		cb.clearConsole();
+
 		// Print options
 		cb.printWithDelay("Options\n1. Pilot Selection\n", 600);
-		cb.printWithDelay("2. Ship Selection\n", 450);
-		cb.printWithDelay("3. Launch Into Space\n", 450, PrintBehaviours::RANDOM_CHAR_COLOR);
+		cb.printWithDelay("2. Pilot Creation", 450);
+		cb.printWithDelay("3. Ship Selection\n", 450);
+		cb.printWithDelay("4. Launch Into Space\n", 450, PrintBehaviours::RANDOM_CHAR_COLOR);
 
 		// Input for option
 		int choice = 0;
@@ -57,27 +59,37 @@ void ConsolePart::menu()
 		case 1:
 			juiceLoad("Loading pilots");
 
-			if (pilotFiles.empty()) {
-				cb.printWithDelay("We can't seem to find any existing pilot for this account...\n", 1000);
-				cb.printWithDelay("Would you like to create a pilot? [Y/N]\n");
-
-				// Get input for yes or no
-				char in = ConsoleInput::GetCharacter(">");
-				if (in == 'Y' || in == 'y') {
-					createPilot();
+			if(!pilotFiles.empty()) {
+				// List all pilots
+				for (int i = 0; i < pilotFiles.size(); i++) {
+					cb.printWithDelay("- " + pilotFiles.at(i) + "\n", 500);
 				}
-				else {
-					exitMessageCall();
-					return;
+				
+				// Input for option
+				std::string choice = ConsoleInput::GetString(">");
+				bool validChoice = false;
+				for (int i = 0; i < pilotFiles.size(); i++)
+				{
+					if (pilotFiles.at(i) == choice) {
+						validChoice = true;
+						break;
+					}
+				}
+
+				if (validChoice) {
+
 				}
 			}
 			else {
-				cb.printWithDelay("Pilot select!", 800);
+				cb.printWithDelay("No pilots found!", 600);
 			}
 			break;
 		case 2:
+			createPilot();
 			break;
 		case 3:
+			break;
+		case 4:
 			int i = 1;
 			while (true) {
 				i += 2;
