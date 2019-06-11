@@ -29,6 +29,11 @@ struct ConsolePart : GamePart {
 	void createPilot();
 
 	/*
+	Ship related functions
+	*/
+	void createShip();
+
+	/*
 	Juicy
 	*/
 	void juiceLoad(std::string juiceString);

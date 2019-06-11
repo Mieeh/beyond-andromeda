@@ -192,7 +192,13 @@ void ConsoleBeautifier::clearConsole()
 	// Output the permanents after clearing
 	centerText("BEYOND ANDROMEDA");
 	
-	std::string appends[] = { "Ship: ", "More: " };
+	// other
+	std::string _shipSelected = "N/A";
+	if (Ship::selected)
+		_shipSelected = "Selected";
+
+
+	std::string appends[] = { "Ship: " + _shipSelected, "More: " };
 	farRightText("Pilot: " + Current::Get()->pilot.name, appends, 2);
 }
 

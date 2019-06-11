@@ -142,6 +142,7 @@
     <ClCompile Include="engine\persistence\binary_stream.cpp" />
     <ClCompile Include="engine\persistence\persistence.cpp" />
     <ClCompile Include="engine\science\element.cpp" />
+    <ClCompile Include="engine\ship.cpp" />
     <ClCompile Include="game\console_part.cpp" />
     <ClCompile Include="game\main.cpp" />
   </ItemGroup>

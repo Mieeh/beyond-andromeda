@@ -36,6 +36,9 @@
     <ClCompile Include="engine\persistence\binary_stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\persistence\persistence.h">

@@ -15,6 +15,7 @@ struct ShipInventory {
 
 // Main struct for a ship, this is serialized 
 struct Ship {
+	static bool selected;
 	int hp; // Call this integrity in-game, it's a value for how damaged the ship is
 	ShipStructure shipStructure;
 	ShipInventory shipInventory;
