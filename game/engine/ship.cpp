@@ -1,4 +1,9 @@
-#include"ship.h"
+#include "ship.h"
 
-// Static initalization
-bool Ship::selected = false;
+Ship::Ship(ShipStructure shipStructure)
+{
+	this->shipStructure = shipStructure;
+
+	// Calculate hp
+	hp = shipStructure.hull * 3; // Temporary @
+}

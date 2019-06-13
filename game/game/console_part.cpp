@@ -257,17 +257,29 @@ void ConsolePart::createShip()
 			}
 		}
 
-		// Construct ship
-		Ship ship;
-		ship.shipStructure.hull = hull_points;
-		ship.shipStructure.analyzer = analyzer_points;
-		ship.shipStructure.engine = engine_points;
+		// get ship ID
+		cb.printWithDelay("Enter a identification number for this ship\n");
+		int id = 0;
+		while (true) {
+			auto input = ConsoleInput::GetString(">");
+			// Convert to number safely
+			std::stringstream sstream(input);
+			if (sstream >> id)
+				break;
+			cb.printWithDelay("Please enter a valid identification number!\n");
+		}
 
-		// Static ship thing
-		Ship::selected = true;
+		// Construct ship
+		ShipStructure structure;
+		structure.analyzer = analyzer_points;
+		structure.engine = engine_points;
+		structure.hull = hull_points;
+		Ship ship = Ship(structure);
 
 		// Set current ship
 		Current::Get()->ship = ship;
 
+		// Serialize current ship!
+		binary_stream.serializeShip(id, Current::Get()->ship);
 	}
 }

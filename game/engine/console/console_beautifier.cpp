@@ -193,13 +193,8 @@ void ConsoleBeautifier::clearConsole()
 	centerText("BEYOND ANDROMEDA");
 	
 	// other
-	std::string _shipSelected = "N/A";
-	if (Ship::selected)
-		_shipSelected = "Selected";
-
-
-	std::string appends[] = { "Ship: " + _shipSelected, "More: " };
-	farRightText("Pilot: " + Current::Get()->pilot.name, appends, 2);
+	std::string appends[] = { "More: " };
+	farRightText("Pilot: " + Current::Get()->pilot.name, appends, 1);
 }
 
 void ConsoleBeautifier::pause(int ms)

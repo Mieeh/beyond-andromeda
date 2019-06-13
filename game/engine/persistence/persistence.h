@@ -7,5 +7,6 @@
 struct PersistenceStruct {
 	
 	std::vector<std::string> getPilotFileNames();
+	std::vector<std::string> getShipFileNames();
 
 };
