@@ -32,13 +32,16 @@ void ConsolePart::menu()
 
 		cb.clearConsole();
 
-		// Print options
+		/* Print options */
 		cb.setConsoleColor(CONSOLE_COLOR::RED, CONSOLE_COLOR::BLACK);
 		cb.printWithDelay("1. Pilot Selection\n", 600);
 		cb.printWithDelay("2. Pilot Creation\n", 450);
+
 		cb.setConsoleColor(CONSOLE_COLOR::GREEN, CONSOLE_COLOR::BLACK);
 		cb.printWithDelay("3. Ship Creation\n", 450);
-		cb.printWithDelay("4. Launch Into Space\n", 450, PrintBehaviours::RANDOM_CHAR_COLOR);
+		cb.printWithDelay("4. Ship Selection\n", 450);
+
+		cb.printWithDelay("5. Launch Into Space\n", 450, PrintBehaviours::RANDOM_CHAR_COLOR);
 		cb.resetColors();
 
 		// Input for option
@@ -55,43 +58,9 @@ void ConsolePart::menu()
 		// Clear and evaluate choice
 		cb.clearConsole();
 
-		// Get pilots files for later use
-		auto pilotFiles = persistent.getPilotFileNames();
-
 		switch (choice) {
 		case 1:
-			juiceLoad("Loading pilots");
-
-			if(!pilotFiles.empty()) {
-				// List all pilots
-				for (int i = 0; i < pilotFiles.size(); i++) {
-					cb.printWithDelay("- " + pilotFiles.at(i) + "\n", 500);
-				}
-				
-				// Input for option
-				std::string pilot_choice = ConsoleInput::GetString(">");
-				bool validChoice = false;
-				for (int i = 0; i < pilotFiles.size(); i++)
-				{
-					if (pilotFiles.at(i) == pilot_choice) {
-						validChoice = true;
-						break;
-					}
-				}
-
-				if (validChoice) {
-					// Select pilot
-					Current::Get()->pilot = binary_stream.deserializePilot(pilot_choice);
-				}
-				else {
-					cb.printWithDelay("No pilot with that identification number found", 700);
-					cb.pause(300);
-				}
-			}
-			else {
-				cb.printWithDelay("No pilots found!", 600);
-				cb.pause(400);
-			}
+			selectPilot();
 			break;
 		case 2:
 			createPilot();
@@ -100,13 +69,27 @@ void ConsolePart::menu()
 			createShip();
 			break;
 		case 4:
-			int i = 1;
-			while (true) {
-				i += 2;
-				cb.setRandomBackgroundColor();
-				cb.setRandomForegroundColor();
-				std::cout << rand() % 10;
-				cb.pause(1000/i);
+			selectShip();
+			break;
+		case 5:
+			if (ship_selected && pilot_selected) {
+				int i = 1;
+				while (true) {
+					i += 2;
+					cb.setRandomBackgroundColor();
+					cb.setRandomForegroundColor();
+					std::cout << rand() % 10;
+					cb.pause(1000 / i);
+				}
+			}
+			else {
+				if (!ship_selected && !pilot_selected)
+					cb.printWithDelay("You need to have a ship & pilot selected before launching!", 800);
+				else if (!ship_selected)
+					cb.printWithDelay("You need to have a ship selected before launching!", 800);
+				else
+					cb.printWithDelay("You need to have a pilot selected before launching!", 800);
+				cb.pause(1000);
 			}
 			break;
 		}
@@ -281,5 +264,85 @@ void ConsolePart::createShip()
 
 		// Serialize current ship!
 		binary_stream.serializeShip(id, Current::Get()->ship);
+	}
+}
+
+void ConsolePart::selectPilot()
+{
+	juiceLoad("Loading pilots");
+
+	// Get pilots files for later use
+	auto pilotFiles = persistent.getPilotFileNames();
+
+	if (!pilotFiles.empty()) {
+		// List all pilots
+		for (int i = 0; i < pilotFiles.size(); i++) {
+			cb.printWithDelay("- " + pilotFiles.at(i) + "\n", 500);
+		}
+
+		// Input for option
+		std::string pilot_choice = ConsoleInput::GetString(">");
+		bool validChoice = false;
+		for (int i = 0; i < pilotFiles.size(); i++)
+		{
+			if (pilotFiles.at(i) == pilot_choice) {
+				validChoice = true;
+				break;
+			}
+		}
+
+		if (validChoice) {
+			// Select pilot
+			Current::Get()->pilot = binary_stream.deserializePilot(pilot_choice);
+			pilot_selected = true;
+		}
+		else {
+			cb.printWithDelay("No pilot with that identification number found", 700);
+			cb.pause(300);
+		}
+	}
+	else {
+		cb.printWithDelay("No pilots found!", 600);
+		cb.pause(400);
+	}
+}
+
+void ConsolePart::selectShip()
+{
+	juiceLoad("Loading ships");
+
+	// Get pilots files for later use
+	auto shipFiles = persistent.getShipFileNames();
+
+	if (!shipFiles.empty()) {
+		// List all pilots
+		for (int i = 0; i < shipFiles.size(); i++) {
+			cb.printWithDelay("- " + shipFiles.at(i) + "\n", 500);
+		}
+
+		// Input for option
+		std::string ship_choice = ConsoleInput::GetString(">");
+		bool validChoice = false;
+		for (int i = 0; i < shipFiles.size(); i++)
+		{
+			if (shipFiles.at(i) == ship_choice) {
+				validChoice = true;
+				break;
+			}
+		}
+
+		if (validChoice) {
+			// Select pilot
+			Current::Get()->ship = binary_stream.deserializeShip(ship_choice);
+			ship_selected = true;
+		}
+		else {
+			cb.printWithDelay("No ship with that identification number found", 700);
+			cb.pause(300);
+		}
+	}
+	else {
+		cb.printWithDelay("No ships found!", 600);
+		cb.pause(400);
 	}
 }

@@ -43,7 +43,7 @@ struct ConsoleBeautifier {
 	Text aligning to different positions in the console
 	*/
 	void centerText(const std::string& string);
-	void farRightText(const std::string& string, std::string* appends = nullptr, size_t appends_size = 0);
+	void farRightText(std::string* str_list, size_t element_count);
 
 	/*
 	Clears console

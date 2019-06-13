@@ -15,7 +15,7 @@ struct ShipInventory {
 
 // Main struct for a ship, this is serialized 
 struct Ship {
-	Ship() { } // Empty constructor
+	Ship(); // Empty constructor
 	Ship(ShipStructure shipStructure);
 
 	unsigned int hp; // Call this integrity in-game, it's a value for how damaged the ship is

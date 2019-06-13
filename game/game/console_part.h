@@ -34,6 +34,16 @@ struct ConsolePart : GamePart {
 	void createShip();
 
 	/*
+	Select a pilot routine
+	*/
+	void selectPilot();
+
+	/*
+	Select a ship routine
+	*/
+	void selectShip();
+
+	/*
 	Juicy
 	*/
 	void juiceLoad(std::string juiceString);
@@ -44,4 +54,7 @@ struct ConsolePart : GamePart {
 	ConsoleBeautifier cb;
 	PersistenceStruct persistent;
 	BinaryStream binary_stream;
+
+	bool pilot_selected = false;
+	bool ship_selected = false;
 };

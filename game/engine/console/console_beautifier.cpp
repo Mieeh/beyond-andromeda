@@ -2,6 +2,8 @@
 
 #include"../color.h"
 #include"../current.h"
+#include"../ship.h"
+#include"../pilot.h"
 
 #include<string>
 #include<chrono> // Crossplatform, we use for delayed print functionality
@@ -110,7 +112,7 @@ void ConsoleBeautifier::centerText(const std::string & string)
 #endif
 }
 
-void ConsoleBeautifier::farRightText(const std::string & string, std::string* appends, size_t appends_size)
+void ConsoleBeautifier::farRightText(std::string* str_list, size_t element_count)
 {
 	HANDLE                     hStdOut;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -123,23 +125,24 @@ void ConsoleBeautifier::farRightText(const std::string & string, std::string* ap
 
 	/* Get the number of cells in the current buffer */
 	if (!GetConsoleScreenBufferInfo(hStdOut, &csbi)) return;
-	// How many spaces do we go
-	int spaces = csbi.dwSize.X - string.length()*1.5;
-
-	// The line
-	for (int i = 0; i < spaces; i++) {
-		std::cout << " ";
-	}
-	std::cout << string << std::endl;
-
-	// Appends
-	for (int j = 0; j < appends_size; j++) {
-		for (int i = 0; i < spaces; i++) {
-			std::cout << " ";
+	// How many spaces do we go?
+	int longest_word = str_list[0].length();
+	for (int i = 1; i < element_count; i++) {
+		if (str_list[i].length() > longest_word) {
+			longest_word = str_list[i].length();
 		}
-		std::cout << appends[j] << std::endl;
 	}
 
+	static float PADDING = 1.3f;
+	int spaces = csbi.dwSize.X - longest_word*PADDING;
+
+	// Output everything now that we know how many spaces we need to go
+	for (int i = 0; i < element_count; i++) {
+		// Output all the spaces
+		for (int i = 0; i < spaces; i++)
+			std::cout << " ";
+		std::cout << str_list[i] << std::endl;
+	}
 }
 
 void ConsoleBeautifier::clearConsole()
@@ -192,9 +195,23 @@ void ConsoleBeautifier::clearConsole()
 	// Output the permanents after clearing
 	centerText("BEYOND ANDROMEDA");
 	
-	// other
-	std::string appends[] = { "More: " };
-	farRightText("Pilot: " + Current::Get()->pilot.name, appends, 1);
+	// 
+	std::string pilot_words[] = { "PILOT", "Name: " + Current::Get()->pilot.name };
+	std::string ship_words[] = { 
+		"SHIP",
+		"HP: " + std::to_string(Current::Get()->ship.hp),
+		"Hull: " + std::to_string(Current::Get()->ship.shipStructure.hull),
+		"Engine: " + std::to_string(Current::Get()->ship.shipStructure.engine),
+		"Analyzer: " + std::to_string(Current::Get()->ship.shipStructure.analyzer)
+	};
+
+	// Output shit
+	setConsoleColor(CONSOLE_COLOR::GREEN, CONSOLE_COLOR::BLACK);
+	farRightText(pilot_words, sizeof(pilot_words)/sizeof(std::string));
+	setConsoleColor(CONSOLE_COLOR::RED, CONSOLE_COLOR::BLACK);
+	farRightText(ship_words, sizeof(ship_words) / sizeof(std::string));
+
+	resetColors();
 }
 
 void ConsoleBeautifier::pause(int ms)
