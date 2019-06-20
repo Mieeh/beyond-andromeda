@@ -33,7 +33,7 @@ void ConsolePart::menu()
 		cb.clearConsole();
 
 		/* Print options */
-		cb.setConsoleColor(CONSOLE_COLOR::RED, CONSOLE_COLOR::BLACK);
+		cb.setConsoleColor(CONSOLE_COLOR::CYAN, CONSOLE_COLOR::BLACK);
 		cb.printWithDelay("1. Pilot Selection\n", 600);
 		cb.printWithDelay("2. Pilot Creation\n", 450);
 
@@ -74,13 +74,15 @@ void ConsolePart::menu()
 		case 5:
 			if (ship_selected && pilot_selected) {
 				int i = 1;
-				while (true) {
+				while (i < 100000*0.7f) {
 					i += 2;
 					cb.setRandomBackgroundColor();
 					cb.setRandomForegroundColor();
 					std::cout << rand() % 10;
 					cb.pause(1000 / i);
 				}
+				cb.clearConsole();
+				nextPart->enter(); // Go into the next part
 			}
 			else {
 				if (!ship_selected && !pilot_selected)

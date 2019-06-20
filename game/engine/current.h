@@ -4,7 +4,7 @@
 #include"ship.h"
 
 struct Current {
-	Current(){ }
+	Current();
 	static Current* _instance;
 
 	static Current* Get() {

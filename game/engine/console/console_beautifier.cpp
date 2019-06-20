@@ -5,6 +5,8 @@
 #include"../ship.h"
 #include"../pilot.h"
 
+#include"../sfml/sfml_audio_singleton.h"
+
 #include<string>
 #include<chrono> // Crossplatform, we use for delayed print functionality
 #include<iostream>
@@ -80,8 +82,9 @@ void ConsoleBeautifier::printWithDelay(const std::string & string, int time, Pri
 			setRandomForegroundColor();
 		}
 
-		std::cout << c;
-		pause(delay);
+		std::cout << c; // output the actual char
+		SFMLAudio::Get()->playSFX("temp_console_sfx1.ogg", 7); // sfx
+		pause(delay); // wait for some time before outputting the next char
 	}
 
 	if (behaviours == PrintBehaviours::RANDOM_CHAR_COLOR) {
@@ -193,11 +196,13 @@ void ConsoleBeautifier::clearConsole()
 #endif
 
 	// Output the permanents after clearing
+	setConsoleColor(CONSOLE_COLOR::PINK, CONSOLE_COLOR::BLACK);
 	centerText("BEYOND ANDROMEDA");
+	resetColors();
 	
-	// 
-	std::string pilot_words[] = { "PILOT", "Name: " + Current::Get()->pilot.name };
-	std::string ship_words[] = { 
+	// info
+	std::string words[] = { "PILOT", "Name: " + Current::Get()->pilot.name, 
+		"",
 		"SHIP",
 		"HP: " + std::to_string(Current::Get()->ship.hp),
 		"Hull: " + std::to_string(Current::Get()->ship.shipStructure.hull),
@@ -206,10 +211,7 @@ void ConsoleBeautifier::clearConsole()
 	};
 
 	// Output shit
-	setConsoleColor(CONSOLE_COLOR::GREEN, CONSOLE_COLOR::BLACK);
-	farRightText(pilot_words, sizeof(pilot_words)/sizeof(std::string));
-	setConsoleColor(CONSOLE_COLOR::RED, CONSOLE_COLOR::BLACK);
-	farRightText(ship_words, sizeof(ship_words) / sizeof(std::string));
+	farRightText(words, sizeof(words) / sizeof(std::string));
 
 	resetColors();
 }
