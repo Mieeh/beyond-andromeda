@@ -3,13 +3,12 @@
 #include"../engine/imgui/imgui.h"
 #include"../engine/imgui/imgui-SFML.h"
 
-#include<squip-ecs\squip-ecs.h>
 #include<SFML\Graphics.hpp>
 
 #include"../engine/sfml/sfml_window_singleton.h"
 #include"../engine/sfml/sfml_audio_singleton.h"
 
-using namespace squip;
+#include"../engine/game_objects_system/game_world.h"
 
 void MainPart::enter()
 {
@@ -20,9 +19,10 @@ void MainPart::enter()
 	
 	// Load sfx
 	SFMLAudio::Get(); // Loads sfx in the constructor method
-															
-	ecs::World world;
-	world.addEntity("run that shit back");
+				
+	// World object
+	GameWorld game_world(window);
+	game_world.setupWorld();
 
 	// Main game loop
 	sf::Clock deltaClock;
@@ -39,10 +39,9 @@ void MainPart::enter()
 	
 		/* Logic updates here */
 		ImGui::SFML::Update(window, deltaClock.restart()); // Update IMGUI
-		world.onUpdate();
 
 		/* Render starts here */
-		ImGui::ShowDemoWindow();
+		game_world.render();
 
 		ImGui::SFML::Render(window); // Render ImGUI
 		window.display();

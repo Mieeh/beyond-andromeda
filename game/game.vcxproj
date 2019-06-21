@@ -135,6 +135,9 @@
     <ClInclude Include="engine\console\console_input.h" />
     <ClInclude Include="engine\constants.h" />
     <ClInclude Include="engine\current.h" />
+    <ClInclude Include="engine\game_objects_system\game_world.h" />
+    <ClInclude Include="engine\game_objects_system\ship_object.h" />
+    <ClInclude Include="engine\game_objects_system\ui_system.h" />
     <ClInclude Include="engine\imgui\imconfig.h" />
     <ClInclude Include="engine\imgui\imgui-SFML.h" />
     <ClInclude Include="engine\imgui\imgui-SFML_export.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="engine\persistence\persistence.h" />
     <ClInclude Include="engine\persistence\binary_stream.h" />
     <ClInclude Include="engine\pilot.h" />
+    <ClInclude Include="engine\renderable.h" />
     <ClInclude Include="engine\science\element.h" />
     <ClInclude Include="engine\science\element_factory.h" />
     <ClInclude Include="engine\sfml\sfml_audio_singleton.h" />
@@ -158,6 +162,9 @@
   <ItemGroup>
     <ClCompile Include="engine\console\console_beautifier.cpp" />
     <ClCompile Include="engine\current.cpp" />
+    <ClCompile Include="engine\game_objects_system\game_world.cpp" />
+    <ClCompile Include="engine\game_objects_system\ship_object.cpp" />
+    <ClCompile Include="engine\game_objects_system\ui_system.cpp" />
     <ClCompile Include="engine\imgui\imgui-SFML.cpp" />
     <ClCompile Include="engine\imgui\imgui.cpp" />
     <ClCompile Include="engine\imgui\imgui_demo.cpp" />

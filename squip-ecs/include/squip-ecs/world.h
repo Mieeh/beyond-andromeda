@@ -21,6 +21,7 @@ public:
 	- Return raw pointer of entity that with id that resides in this world
 	*/
 	Entity* getEntity(const std::string& id);
+	std::vector<std::unique_ptr<Entity>>& getEntityList();
 
 	/*
 	- Adds new entity with id to this world
