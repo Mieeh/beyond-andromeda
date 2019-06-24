@@ -12,5 +12,5 @@ Ship::Ship(ShipStructure shipStructure)
 	this->shipStructure = shipStructure;
 
 	// Calculate hp
-	hp = shipStructure.hull * 3; // Temporary @
+	hp = MAX_HP(shipStructure.hull); // Temporary @
 }

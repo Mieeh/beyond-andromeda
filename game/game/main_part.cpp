@@ -10,8 +10,14 @@
 
 #include"../engine/game_objects_system/game_world.h"
 
+#include"../engine/asteroid_generator.h"
+
+#define PI 3.14159
+
 void MainPart::enter()
 {
+	srand(time(0)); // Seed random generation
+
 	// Get the window from the singleton class
 	SFMLWindow::Get()->CreateWindow();
 	auto& window = *SFMLWindow::Get()->window;

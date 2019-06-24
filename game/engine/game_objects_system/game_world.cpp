@@ -13,7 +13,7 @@ void GameWorld::setupWorld()
 void GameWorld::render()
 {
 	/* Call render methods and render all entities */
-	render_window.draw(ship_object.GetDrawable());
+	//render_window.draw(ship_object.GetDrawable());
 
 	UISystem::Get()->render();
 }

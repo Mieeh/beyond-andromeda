@@ -3,6 +3,8 @@
 #include<string>
 #include<vector>
 
+#define MAX_HP(hull) 3*hull
+
 struct ShipStructure {
 	int hull;      // Some lvalue used when evalutaing hull related calcs for the ship
 	int analyzer;  // Some lvalue used when evaluating things related to analyzing when using the ship

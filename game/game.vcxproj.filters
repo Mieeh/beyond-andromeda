@@ -161,6 +161,12 @@
     <ClInclude Include="engine\game_objects_system\ui_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\asteroid_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="engine\imgui\.editorconfig" />
