@@ -2,9 +2,7 @@
 
 // Singleton window for a sfml render window
 
-namespace sf {
-	class RenderWindow;
-}
+#include<SFML\Graphics.hpp>
 
 class SFMLWindow {
 private:

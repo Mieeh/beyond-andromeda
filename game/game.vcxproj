@@ -136,6 +136,7 @@
     <ClInclude Include="engine\console\console_input.h" />
     <ClInclude Include="engine\constants.h" />
     <ClInclude Include="engine\current.h" />
+    <ClInclude Include="engine\game_objects_system\asteroid_object.h" />
     <ClInclude Include="engine\game_objects_system\game_world.h" />
     <ClInclude Include="engine\game_objects_system\ship_object.h" />
     <ClInclude Include="engine\game_objects_system\ui_system.h" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="engine\console\console_beautifier.cpp" />
     <ClCompile Include="engine\current.cpp" />
+    <ClCompile Include="engine\game_objects_system\asteroid_object.cpp" />
     <ClCompile Include="engine\game_objects_system\game_world.cpp" />
     <ClCompile Include="engine\game_objects_system\ship_object.cpp" />
     <ClCompile Include="engine\game_objects_system\ui_system.cpp" />

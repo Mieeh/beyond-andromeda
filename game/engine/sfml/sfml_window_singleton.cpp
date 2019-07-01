@@ -1,7 +1,5 @@
 #include "sfml_window_singleton.h"
 
-#include<SFML\Graphics.hpp>
-
 SFMLWindow* SFMLWindow::instance = nullptr;
 
 SFMLWindow * SFMLWindow::Get()
@@ -14,7 +12,7 @@ SFMLWindow * SFMLWindow::Get()
 
 void SFMLWindow::CreateWindow()
 {
-	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Beyond Andromeda");		
+	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Beyond Andromeda");
 }
 
 void SFMLWindow::Shutdown()

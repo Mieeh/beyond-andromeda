@@ -60,9 +60,6 @@
     <ClCompile Include="engine\sfml\sfml_window_singleton.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\sfml\sfml_window_singleton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="engine\sfml\sfml_audio_singleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -73,6 +70,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\game_objects_system\ui_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\sfml\sfml_window_singleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\game_objects_system\asteroid_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,6 +168,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\game_objects_system\asteroid_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
