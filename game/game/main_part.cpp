@@ -10,8 +10,6 @@
 
 #include"../engine/game_objects_system/game_world.h"
 
-#include"../engine/asteroid_generator.h"
-
 #define PI 3.14159
 
 void MainPart::enter()
@@ -22,6 +20,9 @@ void MainPart::enter()
 	SFMLWindow::Get()->CreateWindow();
 	auto& window = *SFMLWindow::Get()->window;
 	ImGui::SFML::Init(window); // Init IMGUI-SFML connection
+	
+	// Get the view 
+	auto& view = SFMLWindow::Get()->view;
 	
 	// Load sfx
 	SFMLAudio::Get(); // Loads sfx in the constructor method
@@ -38,11 +39,17 @@ void MainPart::enter()
 			ImGui::SFML::ProcessEvent(event); // Send processed event to ImGui
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::Resized) {
+				view.setSize({ (float)event.size.width, (float)event.size.height });
+			}
 		}
 	
 		// Clear for render
 		window.clear();
 	
+		// View thingy has to been done each frame appearently...
+		window.setView(view);
+
 		/* Logic updates here */
 		ImGui::SFML::Update(window, deltaClock.restart()); // Update IMGUI
 

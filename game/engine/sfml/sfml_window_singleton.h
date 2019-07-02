@@ -27,4 +27,5 @@ public:
 	
 	// Public members
 	sf::RenderWindow* window;
+	sf::View view;
 };

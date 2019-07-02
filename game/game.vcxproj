@@ -130,7 +130,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="engine\asteroid_generator.h" />
+    <ClInclude Include="engine\game_objects_system\sun_object.h" />
+    <ClInclude Include="engine\planetary_utility.h" />
     <ClInclude Include="engine\color.h" />
     <ClInclude Include="engine\console\console_beautifier.h" />
     <ClInclude Include="engine\console\console_input.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="engine\game_objects_system\asteroid_object.cpp" />
     <ClCompile Include="engine\game_objects_system\game_world.cpp" />
     <ClCompile Include="engine\game_objects_system\ship_object.cpp" />
+    <ClCompile Include="engine\game_objects_system\sun_object.cpp" />
     <ClCompile Include="engine\game_objects_system\ui_system.cpp" />
     <ClCompile Include="engine\imgui\imgui-SFML.cpp" />
     <ClCompile Include="engine\imgui\imgui.cpp" />

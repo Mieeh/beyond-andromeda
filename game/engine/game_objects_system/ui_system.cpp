@@ -8,7 +8,6 @@ UISystem* UISystem::instance = nullptr;
 #include"../imgui/imgui.h"
 #include"../current.h"
 #include"../sfml/sfml_window_singleton.h"
-#include"../asteroid_generator.h"
 
 UISystem * UISystem::Get()
 {
@@ -25,6 +24,7 @@ void UISystem::setup()
 void UISystem::render()
 {
 	static auto current = Current::Get();
+	static auto window_singleton = SFMLWindow::Get();
 
 	ImVec2 windowSize = ImGui::GetIO().DisplaySize;
 	bool* p_open = NULL;
@@ -32,9 +32,9 @@ void UISystem::render()
 		ImGuiWindowFlags_::ImGuiWindowFlags_NoMove | ImGuiWindowFlags_::ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_::ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_::ImGuiWindowFlags_AlwaysAutoResize;
 	
-	static ImVec2 selectViewProportions(0.45, 0.35); // Percent of screen 
+	static ImVec2 selectViewProportions(0.3, 0.3); // Percent of screen 
 	static ImVec2 shipWindowProportions(0.4, 0.2);
-	static ImVec2 logProportions(0.3, 0.25);
+	static ImVec2 logProportions(0.3, 0.3);
 
 	ImVec2 selectViewSize = ImVec2(windowSize.x * selectViewProportions.x, windowSize.y * selectViewProportions.y);
 	ImVec2 shipWindowSize(windowSize.x*shipWindowProportions.x, windowSize.y*shipWindowProportions.y);
@@ -47,6 +47,20 @@ void UISystem::render()
 	ImGui::SetNextWindowSize(selectViewSize);				
 	ImGui::Begin("Select View", p_open, window_config);
 
+	float x = window_singleton->view.getCenter().x;
+	float y = window_singleton->view.getCenter().y;
+	ImGui::DragFloat("x", &x);
+	ImGui::DragFloat("y", &y);
+
+	if (ImGui::Button("-")) {
+		window_singleton->view.zoom(1.1);
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("+")) {
+		window_singleton->view.zoom(0.9);
+	}
+
+	window_singleton->view.setCenter({ x,y });
 
 	ImGui::End();
 

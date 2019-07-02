@@ -2,6 +2,7 @@
 
 #include"ship_object.h"
 #include"asteroid_object.h"
+#include"sun_object.h"
 
 #include<vector>
 
@@ -12,8 +13,11 @@ namespace sf {
 struct GameWorld {
 
 	ShipObject ship_object;
+	SunObject sun_object;
+	std::vector<AsteroidObject> asteroids;
+
+	sf::Shader sun_shader;
 	sf::RenderWindow& render_window;
-	std::vector<AsteroidObject*> asteroids;
 
 	GameWorld(sf::RenderWindow& window) : render_window(window) { }
 	void setupWorld();
