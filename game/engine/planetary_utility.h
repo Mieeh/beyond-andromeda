@@ -213,3 +213,11 @@ static sf::VertexArray DeserializeVertexArray(const std::string& file_name) {
 
 	return points;
 }
+
+/* Uses the law for calculating a conic sections by Kepler */
+/*
+alpha is the true anomaly which is the angle between the current position and the location in the orbit at which it is closest to the central body  
+*/
+static double getKeplerRadius(double alpha, double e, double a) {
+	return abs((a*(1 - e*e)) / (1 + e*cos(alpha)));
+}

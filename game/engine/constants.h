@@ -1,4 +1,5 @@
 #pragma once
 
 #define PERSISTENT_PATH "persistent//"
-#define SR 1200 // Sun radius in pixels
+#define SR 2000 // Sun radius in pixels
+#define PI 3.14159f

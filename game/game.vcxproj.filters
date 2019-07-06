@@ -81,6 +81,9 @@
     <ClCompile Include="engine\game_objects_system\sun_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine\game_objects_system\alyssum_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\persistence\persistence.h">
@@ -177,6 +180,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\game_objects_system\sun_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\game_objects_system\planet_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\game_objects_system\alyssum_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

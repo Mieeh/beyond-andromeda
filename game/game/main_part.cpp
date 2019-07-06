@@ -32,7 +32,8 @@ void MainPart::enter()
 	game_world.setupWorld();
 
 	// Main game loop
-	sf::Clock deltaClock;
+	sf::Clock deltaClock1;
+	sf::Clock deltaClock2;
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -44,14 +45,15 @@ void MainPart::enter()
 			}
 		}
 	
+		/* Update */
+		ImGui::SFML::Update(window, deltaClock1.restart()); // Update IMGUI
+		game_world.update(deltaClock2.restart().asSeconds());
+
 		// Clear for render
 		window.clear();
 	
 		// View thingy has to been done each frame appearently...
 		window.setView(view);
-
-		/* Logic updates here */
-		ImGui::SFML::Update(window, deltaClock.restart()); // Update IMGUI
 
 		/* Render starts here */
 		game_world.render();

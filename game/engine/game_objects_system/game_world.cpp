@@ -9,11 +9,6 @@ void GameWorld::setupWorld()
 	// Call setup on systems
 	UISystem::Get()->setup();
 
-	for (int i = 0; i < 4; i++) {
-		AsteroidObject as;
-		asteroids.push_back(as);
-	}
-
 	// Setup sun shader
 	if (!sun_shader.loadFromFile("resources\\shaders\\sun.frag", sf::Shader::Fragment)) {
 		std::cout << "Sun shader not loading!" << std::endl;
@@ -30,11 +25,18 @@ void GameWorld::render()
 	/* Call render methods and render all entities */
 	render_window.draw(ship_object.GetDrawable());
 
-	render_window.draw(sun_object.GetDrawable(), &sun_shader);
+	render_window.draw(sun_object.GetDrawable());
+
+	render_window.draw(alyssum_object.GetDrawable());
 
 	for (auto& astr : asteroids) {
 		render_window.draw(astr.GetDrawable());
 	}
 
 	UISystem::Get()->render();
+}
+
+void GameWorld::update(float dt)
+{
+	alyssum_object.Update(dt);
 }

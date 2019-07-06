@@ -130,6 +130,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="engine\game_objects_system\alyssum_object.h" />
+    <ClInclude Include="engine\game_objects_system\planet_object.h" />
     <ClInclude Include="engine\game_objects_system\sun_object.h" />
     <ClInclude Include="engine\planetary_utility.h" />
     <ClInclude Include="engine\color.h" />
@@ -166,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="engine\console\console_beautifier.cpp" />
     <ClCompile Include="engine\current.cpp" />
+    <ClCompile Include="engine\game_objects_system\alyssum_object.cpp" />
     <ClCompile Include="engine\game_objects_system\asteroid_object.cpp" />
     <ClCompile Include="engine\game_objects_system\game_world.cpp" />
     <ClCompile Include="engine\game_objects_system\ship_object.cpp" />

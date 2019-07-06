@@ -6,6 +6,7 @@ SunObject::SunObject()
 {
 	shape.setRadius(1*SR); // 1 sun radius
 	shape.setFillColor(sf::Color::Yellow);
+	shape.setPosition({ -SR, -SR });
 }
 
 sf::Drawable & SunObject::GetDrawable()
