@@ -9,7 +9,7 @@ class AlyssumObject : public PlanetObject, public Renderable {
 public:
 	AlyssumObject();
 	sf::Drawable& GetDrawable() override;
-	void Update(float dt);
+	void Update();
 
 	sf::CircleShape shape;
 	double angle;

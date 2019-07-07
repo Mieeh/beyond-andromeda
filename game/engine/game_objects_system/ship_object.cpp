@@ -4,7 +4,7 @@ ShipObject::ShipObject()
 {
 	shipSprite.setSize(sf::Vector2f(30, 30));
 	shipSprite.setFillColor(sf::Color::Red);
-	shipSprite.setPosition(sf::Vector2f(300, 200));
+	shipSprite.setPosition(sf::Vector2f(-15, -15));
 }
 
 sf::Drawable & ShipObject::GetDrawable()

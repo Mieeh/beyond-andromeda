@@ -3,6 +3,7 @@
 #include"ui_system.h"
 
 #include<SFML\Graphics.hpp>
+#include<iostream>
 
 void GameWorld::setupWorld()
 {
@@ -36,7 +37,8 @@ void GameWorld::render()
 	UISystem::Get()->render();
 }
 
-void GameWorld::update(float dt)
+void GameWorld::update()
 {
-	alyssum_object.Update(dt);
+	// Update all objects that need to be updated 
+	alyssum_object.Update();
 }

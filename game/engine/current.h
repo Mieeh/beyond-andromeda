@@ -14,6 +14,12 @@ struct Current {
 		return _instance;
 	}
 
+	/* Methods */
+	inline float getTimeStep() { return deltaTime * timeScale; }
+
+	/* Members */
 	Pilot pilot;
 	Ship ship;
+	float timeScale;
+	float deltaTime;
 };

@@ -1,6 +1,8 @@
 #include "alyssum_object.h"
 
 #include"../constants.h"
+#include"../planetary_utility.h"
+#include"../current.h"
 
 #include<iostream>
 
@@ -18,19 +20,20 @@ sf::Drawable & AlyssumObject::GetDrawable()
 	return shape;
 }
 
-void AlyssumObject::Update(float dt)
+void AlyssumObject::Update()
 {
+	float dt = Current::Get()->getTimeStep();
+
 	// Angle incrementing
-	angle += 2*dt;
-	//if (angle > 2 * PI)
-	//	angle = 0;
+	angle += .2 * dt;
+	if (angle > 2 * PI)
+		angle = 0;
 
-	std::cout << angle << std::endl;
+	static double a = 3 * SR;
+	static double b = 1.5 * SR;
 
-	static double R = SR*1.2f;
-
-	position.x = R*cos(angle);
-	position.y = R*sin(angle);
+	position.x = a * cos(angle) - 0.2*SR;
+	position.y = b * sin(angle) - 0.2*SR;
 
 	shape.setPosition(position);
 }

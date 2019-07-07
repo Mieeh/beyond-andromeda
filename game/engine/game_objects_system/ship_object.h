@@ -1,6 +1,5 @@
 #pragma once
 
-#include<squip-ecs\squip-ecs.h>
 #include"../renderable.h"
 #include<SFML\Graphics.hpp>
 

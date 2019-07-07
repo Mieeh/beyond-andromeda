@@ -10,6 +10,8 @@
 
 #include"../engine/game_objects_system/game_world.h"
 
+#include"../engine/current.h"
+
 #define PI 3.14159
 
 void MainPart::enter()
@@ -47,7 +49,8 @@ void MainPart::enter()
 	
 		/* Update */
 		ImGui::SFML::Update(window, deltaClock1.restart()); // Update IMGUI
-		game_world.update(deltaClock2.restart().asSeconds());
+		Current::Get()->deltaTime = deltaClock2.restart().asSeconds();
+		game_world.update();
 
 		// Clear for render
 		window.clear();

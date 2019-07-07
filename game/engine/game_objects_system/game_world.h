@@ -24,6 +24,6 @@ struct GameWorld {
 	GameWorld(sf::RenderWindow& window) : render_window(window) { }
 	void setupWorld();
 	void render(); // Renders stuff
-	void update(float dt);
+	void update();
 
 };
