@@ -1,13 +1,13 @@
 #pragma once
 
-#include"../renderable.h"
+#include"entity.h"
 
 #include<SFML\Graphics.hpp>
 
-class SunObject : public Renderable {
+class SunObject : public Entity {
 public:
 	/* Methods */
-	SunObject();
+	SunObject(GameWorld& world);
 	sf::Drawable& GetDrawable() override;
 
 	sf::CircleShape shape;

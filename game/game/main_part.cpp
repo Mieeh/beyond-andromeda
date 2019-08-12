@@ -9,8 +9,11 @@
 #include"../engine/sfml/sfml_audio_singleton.h"
 
 #include"../engine/game_objects_system/game_world.h"
+#include"../engine/game_objects_system/physics_system.h"
 
 #include"../engine/current.h"
+
+#include<iostream>
 
 #define PI 3.14159
 
@@ -25,6 +28,7 @@ void MainPart::enter()
 	
 	// Get the view 
 	auto& view = SFMLWindow::Get()->view;
+	view.setCenter({ 0,0 });
 	
 	// Load sfx
 	SFMLAudio::Get(); // Loads sfx in the constructor method
@@ -33,9 +37,20 @@ void MainPart::enter()
 	GameWorld game_world(window);
 	game_world.setupWorld();
 
+	auto physicsSystem = PhysicsSystem::Get();
+
 	// Main game loop
 	sf::Clock deltaClock1;
 	sf::Clock deltaClock2;
+	sf::Clock fixedUpdateClock;
+	sf::Clock clock;
+
+	fixedUpdateClock.restart();
+	clock.restart();
+
+	double physicsTimeSimulated = 0;
+	double lastUpdateTime = 0;
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -46,11 +61,19 @@ void MainPart::enter()
 				view.setSize({ (float)event.size.width, (float)event.size.height });
 			}
 		}
+
+		while (physicsTimeSimulated < clock.getElapsedTime().asMilliseconds()) {
+			game_world.fixed_update();
+			physicsTimeSimulated += physicsSystem->physicsTimeStep;
+		}
 	
 		/* Update */
 		ImGui::SFML::Update(window, deltaClock1.restart()); // Update IMGUI
 		Current::Get()->deltaTime = deltaClock2.restart().asSeconds();
 		game_world.update();
+
+		// Used for fixed update
+		lastUpdateTime = clock.getElapsedTime().asMilliseconds();
 
 		// Clear for render
 		window.clear();

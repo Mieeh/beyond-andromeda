@@ -9,6 +9,6 @@ private:
 public:
 	static UISystem* Get();
 
-	void setup();
-	void render();
+	void Setup();
+	void Render();
 };

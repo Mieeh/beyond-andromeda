@@ -3,14 +3,15 @@
 #include"../constants.h"
 #include"../planetary_utility.h"
 #include"../current.h"
+#include"../constants.h"
 
 #include<iostream>
 
-AlyssumObject::AlyssumObject()
+AlyssumObject::AlyssumObject(GameWorld &world) : Entity(world)
 {
 	angle = 0;
 
-	shape.setRadius(0.2*SR);
+	shape.setRadius(ALYSSUM_R);
 	shape.setFillColor(sf::Color::Blue);
 }
 
@@ -25,15 +26,12 @@ void AlyssumObject::Update()
 	float dt = Current::Get()->getTimeStep();
 
 	// Angle incrementing
-	angle += .2 * dt;
+	angle += .5 * dt;
 	if (angle > 2 * PI)
 		angle = 0;
 
-	static double a = 3 * SR;
-	static double b = 1.5 * SR;
+	static double x = 4 * SR;
+	static double y = 2.5 * SR;
 
-	position.x = a * cos(angle) - 0.2*SR;
-	position.y = b * sin(angle) - 0.2*SR;
-
-	shape.setPosition(position);
+	shape.setPosition(x * cos(angle) - ALYSSUM_R, y * sin(angle) - ALYSSUM_R);
 }

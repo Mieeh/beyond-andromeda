@@ -1,12 +1,12 @@
 #pragma once
 
-#include"../renderable.h"
+#include"entity.h"
 #include<SFML\Graphics.hpp>
 
-class ShipObject : public Renderable {
+class PlayerObject : public Entity {
 public:
 	/* Methods */
-	ShipObject();
+	PlayerObject(GameWorld& world);
 	sf::Drawable& GetDrawable() override;
 
 	/* Members */

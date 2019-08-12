@@ -2,7 +2,7 @@
 
 #include"../constants.h"
 
-SunObject::SunObject()
+SunObject::SunObject(GameWorld& world) : Entity(world)
 {
 	shape.setRadius(1*SR); // 1 sun radius
 	shape.setFillColor(sf::Color::Yellow);

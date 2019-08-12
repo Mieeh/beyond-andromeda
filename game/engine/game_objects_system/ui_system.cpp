@@ -16,12 +16,12 @@ UISystem * UISystem::Get()
 	return instance;
 }
 
-void UISystem::setup()
+void UISystem::Setup()
 {
 
 }
 
-void UISystem::render()
+void UISystem::Render()
 {
 	static auto current = Current::Get();
 	static auto window_singleton = SFMLWindow::Get();
@@ -61,6 +61,8 @@ void UISystem::render()
 	}
 
 	window_singleton->view.setCenter({ x,y });
+
+	ImGui::DragFloat("Time Scale", &Current::Get()->timeScale, 0.1f);   
 
 	ImGui::End();
 

@@ -1,15 +1,14 @@
 #pragma once
 
-#include"planet_object.h"
-#include"../renderable.h"
+#include"entity.h"
 
 #include<SFML\Graphics.hpp>
 
-class AlyssumObject : public PlanetObject, public Renderable {
+class AlyssumObject : public Entity {
 public:
-	AlyssumObject();
+	AlyssumObject(GameWorld &world);
 	sf::Drawable& GetDrawable() override;
-	void Update();
+	void Update() override;
 
 	sf::CircleShape shape;
 	double angle;

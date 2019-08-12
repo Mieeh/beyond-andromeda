@@ -1,14 +1,33 @@
 #include "game_world.h"
 
 #include"ui_system.h"
+#include"physics_system.h"
+
+#include"player_object.h"
+#include"asteroid_object.h"
+#include"sun_object.h"
+#include"alyssum_object.h"
 
 #include<SFML\Graphics.hpp>
 #include<iostream>
 
+GameWorld::~GameWorld()
+{
+	for (auto* x : constant_entities) {
+		delete x;   
+	}
+}
+               
 void GameWorld::setupWorld()
 {
+	// Create all entities
+	constant_entities[0] = new AlyssumObject(*this);
+	constant_entities[1] = new SunObject(*this);
+	constant_entities[2] = new PlayerObject(*this);
+
 	// Call setup on systems
-	UISystem::Get()->setup();
+	UISystem::Get()->Setup();
+	PhysicsSystem::Get()->Setup();
 
 	// Setup sun shader
 	if (!sun_shader.loadFromFile("resources\\shaders\\sun.frag", sf::Shader::Fragment)) {
@@ -23,22 +42,22 @@ void GameWorld::setupWorld()
 
 void GameWorld::render()
 {
-	/* Call render methods and render all entities */
-	render_window.draw(ship_object.GetDrawable());
+	for (int i = 0; i < NUM_OF_ENTITIES; i++) {
+		render_window.draw(constant_entities[i]->GetDrawable());
+	}			
 
-	render_window.draw(sun_object.GetDrawable());
-
-	render_window.draw(alyssum_object.GetDrawable());
-
-	for (auto& astr : asteroids) {
-		render_window.draw(astr.GetDrawable());
-	}
-
-	UISystem::Get()->render();
+	UISystem::Get()->Render();
 }
 
 void GameWorld::update()
 {
 	// Update all objects that need to be updated 
-	alyssum_object.Update();
+	for (int i = 0; i < NUM_OF_ENTITIES; i++) {
+		constant_entities[i]->Update();
+	}
+}
+
+void GameWorld::fixed_update()
+{
+	PhysicsSystem::Get()->FixedUpdate();
 }
