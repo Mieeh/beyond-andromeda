@@ -13,13 +13,27 @@ PhysicsSystem* PhysicsSystem::Get() {
 
 void PhysicsSystem::AddPhysicsBody(PhysicsBody* body)
 {
+	physicsBodies.push_back(body);
 }
 
 void PhysicsSystem::Setup()
 {
+
 }
 
 void PhysicsSystem::FixedUpdate()
 {
-	std::cout << "Fixed Update Has Been Called!" << std::endl;
+	for (auto& x : physicsBodies) {
+		// Update all bodies
+		x->FixedUpdate();
+		
+		// Resolve rotation and velocity
+		x->pos.x += x->velocity.x;
+		x->pos.y += x->velocity.y;
+		x->velocity.x *= 1 - x->linearDrag;
+		x->velocity.y *= 1 - x->linearDrag;
+		x->angle += x->angularVelocity;
+		x->angularVelocity *= 1 - x->angularDrag;
+	}
+
 }

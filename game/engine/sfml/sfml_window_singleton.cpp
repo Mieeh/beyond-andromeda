@@ -12,10 +12,10 @@ SFMLWindow * SFMLWindow::Get()
 
 void SFMLWindow::CreateWindow()
 {
-	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Beyond Andromeda");
+	window = new sf::RenderWindow(sf::VideoMode(1100, 800), "Beyond Andromeda");
 
 	// Set views
-	view.reset(sf::FloatRect(0, 0, 800, 600));
+	view.reset(sf::FloatRect(0, 0, 1100, 800));
 	window->setView(view);
 }
 

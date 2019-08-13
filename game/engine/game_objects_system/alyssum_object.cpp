@@ -13,6 +13,7 @@ AlyssumObject::AlyssumObject(GameWorld &world) : Entity(world)
 
 	shape.setRadius(ALYSSUM_R);
 	shape.setFillColor(sf::Color::Blue);
+	shape.setOrigin(sf::Vector2f(ALYSSUM_R, ALYSSUM_R));
 }
 
 sf::Drawable & AlyssumObject::GetDrawable()
@@ -30,8 +31,8 @@ void AlyssumObject::Update()
 	if (angle > 2 * PI)
 		angle = 0;
 
-	static double x = 4 * SR;
+	static double x = 3.5 * SR;
 	static double y = 2.5 * SR;
 
-	shape.setPosition(x * cos(angle) - ALYSSUM_R, y * sin(angle) - ALYSSUM_R);
+	shape.setPosition(x * cos(angle), y * sin(angle));
 }

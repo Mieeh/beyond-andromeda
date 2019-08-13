@@ -13,7 +13,7 @@ enum ElementType {
 	CONSTRUCTION = 3
 };
 
-enum ElementIndex {
+enum ElementIndex { 
 	H = 0,
 	O = 1,
 	C = 2,

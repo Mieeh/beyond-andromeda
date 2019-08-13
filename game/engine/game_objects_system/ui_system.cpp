@@ -8,6 +8,9 @@ UISystem* UISystem::instance = nullptr;
 #include"../imgui/imgui.h"
 #include"../current.h"
 #include"../sfml/sfml_window_singleton.h"
+#include"player_object.h"
+
+#define DEG2RAD 0.0174532925
 
 UISystem * UISystem::Get()
 {
@@ -16,9 +19,9 @@ UISystem * UISystem::Get()
 	return instance;
 }
 
-void UISystem::Setup()
+void UISystem::Setup(GameWorld* world)
 {
-
+	game_world = world;
 }
 
 void UISystem::Render()
@@ -32,8 +35,8 @@ void UISystem::Render()
 		ImGuiWindowFlags_::ImGuiWindowFlags_NoMove | ImGuiWindowFlags_::ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_::ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_::ImGuiWindowFlags_AlwaysAutoResize;
 	
-	static ImVec2 selectViewProportions(0.3, 0.3); // Percent of screen 
-	static ImVec2 shipWindowProportions(0.4, 0.2);
+	static ImVec2 selectViewProportions(0.3, 0.2); // Percent of screen 
+	static ImVec2 shipWindowProportions(0.4, 0.35);
 	static ImVec2 logProportions(0.3, 0.3);
 
 	ImVec2 selectViewSize = ImVec2(windowSize.x * selectViewProportions.x, windowSize.y * selectViewProportions.y);
@@ -79,7 +82,24 @@ void UISystem::Render()
 		+ "\nHull: " + std::to_string(current->ship.shipStructure.hull) + "\nAnalyzer: " + 
 		std::to_string(current->ship.shipStructure.analyzer);
 	ImGui::Text(shipStats.c_str());
+
+	// Controls
+	static PlayerObject* playerObject = static_cast<PlayerObject*>(game_world->constant_entities[2]);
 	
+	if (ImGui::Button("-")) {
+		playerObject->angularVelocity = -1;
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("+")) {
+		playerObject->angularVelocity = +1;
+	}
+
+	static float wishedVelocity = 0;
+	ImGui::SliderFloat("Velocity", &wishedVelocity, 0, 100, "%.2f");
+	playerObject->velocity.x = cos((playerObject->angle + 90) * DEG2RAD);
+	playerObject->velocity.y = sin((playerObject->angle + 90) * DEG2RAD);
+	playerObject->velocity = playerObject->velocity * wishedVelocity;
+
 	ImGui::End();
 	
 	/* Ship window */

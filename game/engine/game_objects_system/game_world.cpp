@@ -20,14 +20,14 @@ GameWorld::~GameWorld()
                
 void GameWorld::setupWorld()
 {
+	// Call setup on systems
+	UISystem::Get()->Setup(this);
+	PhysicsSystem::Get()->Setup();
+
 	// Create all entities
 	constant_entities[0] = new AlyssumObject(*this);
 	constant_entities[1] = new SunObject(*this);
 	constant_entities[2] = new PlayerObject(*this);
-
-	// Call setup on systems
-	UISystem::Get()->Setup();
-	PhysicsSystem::Get()->Setup();
 
 	// Setup sun shader
 	if (!sun_shader.loadFromFile("resources\\shaders\\sun.frag", sf::Shader::Fragment)) {

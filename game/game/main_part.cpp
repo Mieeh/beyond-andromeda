@@ -10,6 +10,7 @@
 
 #include"../engine/game_objects_system/game_world.h"
 #include"../engine/game_objects_system/physics_system.h"
+#include"../engine/game_objects_system/event_system.h"
 
 #include"../engine/current.h"
 
@@ -38,6 +39,7 @@ void MainPart::enter()
 	game_world.setupWorld();
 
 	auto physicsSystem = PhysicsSystem::Get();
+	auto eventSystem = EventSystem::Get();
 
 	// Main game loop
 	sf::Clock deltaClock1;
@@ -55,6 +57,8 @@ void MainPart::enter()
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			ImGui::SFML::ProcessEvent(event); // Send processed event to ImGui
+			eventSystem->TakeEvent(event); // Send event to the engine-system
+
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.type == sf::Event::Resized) {

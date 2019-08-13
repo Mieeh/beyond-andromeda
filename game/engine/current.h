@@ -19,7 +19,7 @@ struct Current {
 
 	/* Members */
 	Pilot pilot;
-	Ship ship;
+	Ship ship;     
 	float timeScale;
 	float deltaTime;
 };

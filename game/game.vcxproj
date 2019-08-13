@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="engine\game_objects_system\alyssum_object.h" />
     <ClInclude Include="engine\game_objects_system\entity.h" />
+    <ClInclude Include="engine\game_objects_system\event_system.h" />
     <ClInclude Include="engine\game_objects_system\physics_system.h" />
     <ClInclude Include="engine\game_objects_system\sun_object.h" />
     <ClInclude Include="engine\planetary_utility.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="engine\current.cpp" />
     <ClCompile Include="engine\game_objects_system\alyssum_object.cpp" />
     <ClCompile Include="engine\game_objects_system\asteroid_object.cpp" />
+    <ClCompile Include="engine\game_objects_system\event_system.cpp" />
     <ClCompile Include="engine\game_objects_system\game_world.cpp" />
     <ClCompile Include="engine\game_objects_system\physics_system.cpp" />
     <ClCompile Include="engine\game_objects_system\player_object.cpp" />
